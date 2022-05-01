@@ -33,7 +33,7 @@ def transcribe_audio(path):
         with sr.AudioFile(chunk_filename) as source:
             audio_file = speech_recognizer.record(source)
             try:
-                text = speech_recognizer.recognize_google(audio_file)
+                text = speech_recognizer.recognize_google(audio_file, language = "hu-HU")
 
             except sr.UnknownValueError as e:
                 print("An Error has occurred while recognising audio file:", str(e))
@@ -51,14 +51,23 @@ def find_keyword(keyword):
    	    print("searching in f" + str(f))
    	    file_content = open(f).read()
    	    text_tokens = tokenizer.tokenize(file_content)
-   	    word_count = len(text_tokens)
-   	    print(word_count)
-   	    file_content.index(keyword)
-   	    res = re.sub("[^\w]", " ",  file_content).split()
-   	    res = res.index(keyword) + 1
-   	    print(res)
    	    text = Text(text_tokens)
-   	    print(text.concordance(keyword))
+   	    
+   	    if keyword in text_tokens:
+   	    	print(text.concordance(keyword))
+   	    	print("found keyword: " + keyword)
+   	    	word_count = len(text_tokens)
+   	    	print("word count: ", word_count)
+   	    	word_index = re.sub("[^\w]", " ",  file_content).split()
+   	    	word_index = word_index.index(keyword) + 1
+   	    	print("word index: ", word_index)
+   	    	if (word_index <= word_count/3):
+   	    		print("Found keyword in the beginning of audio")
+   	    	elif(word_index <= word_count/2):
+   	        	print("Found keyword in the middle of audio")
+   	    	else:
+   	        	print("Found keyword in the end of audio")  
+   	       
                
 
 if __name__ == '__main__':
