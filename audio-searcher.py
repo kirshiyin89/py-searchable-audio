@@ -49,7 +49,7 @@ def transcribe_audio(path):
 
 def find_keyword(keyword):
     for f in os.scandir("/home/kirshi/py-searchable-audio/texts"):
-        print(f"searching in f{str(f)}")
+        print("searching in ", f.name)
         file_content = open(f).read()
         text_tokens = tokenizer.tokenize(file_content)
         text = Text(text_tokens)
