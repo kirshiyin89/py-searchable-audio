@@ -3,6 +3,8 @@ Transcribe audio files and make them searchable.
 
 This project is a demo for my article at medium.com
 
+https://medium.com/better-programming/create-searchable-audio-using-python-78b5afc5122
+
 ## How to run this project:
 
 1. Install the necessary libs from the requirements.txt
